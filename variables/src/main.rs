@@ -13,9 +13,12 @@ fn main() {
     println!("The value of y is: {}", y);
 
     // good
-    let spaces = "      ";
-    let spaces = spaces.len();
+    let _spaces = "      ";
+    let _spaces = _spaces.len();
     // bad
-    let mut spaces2 = "      ";
-    spaces2 = spaces2.len();
+    //let mut spaces2 = "      ";
+    //spaces2 = spaces2.len();
+
+    //let _guess = "42".parse().expect("Not a number!");
+    let _guess: u32 = "42".parse().expect("Not a number!");
 }
