@@ -21,4 +21,18 @@ fn main() {
 
     //let _guess = "42".parse().expect("Not a number!");
     let _guess: u32 = "42".parse().expect("Not a number!");
+
+    let x = 2.0;
+    let y: f32 = 3.0;
+    let remainder = 43 % 5;
+    println!("remainder is: {}", remainder);
+    let f: bool = false;
+    println!("f is: {}", f);
+
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    // bad
+    //println!("tup is: {}", tup);
+    let (a, b, c) = tup;
+    println!("The value of b: {}", b);
+    println!("The value of second: {}", tup.1);
 }
