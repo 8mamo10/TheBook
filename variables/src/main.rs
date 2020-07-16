@@ -35,4 +35,13 @@ fn main() {
     let (a, b, c) = tup;
     println!("The value of b: {}", b);
     println!("The value of second: {}", tup.1);
+
+    let a = [1, 2, 3, 4, 5];
+    let b: [i32; 5] = [1, 2, 3, 4, 5];
+    let c = [3; 5];
+    let first = a[0];
+    let second = a[1];
+    let index = 10;
+    let element = a[index];
+    println!("The value of element is: {}", element);
 }
