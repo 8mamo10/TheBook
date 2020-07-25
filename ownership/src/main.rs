@@ -48,6 +48,16 @@ fn main() {
 
     //let reference_to_nothing = dangle(); // bad
     let _reference_to_something = no_dangle();
+
+    let mut s = String::from("hello world");
+    let word = first_word(&s);
+    s.clear();
+    println!("first word index of {} is {}", s, word);
+
+    let mut s = String::from("hello world");
+    let word = first_word_slice(&s);
+    //s.clear(); // error
+    println!("first word is {}", word);
 }
 
 fn takes_ownership(some_string: String) {
@@ -93,4 +103,24 @@ fn change(some_string: &mut String) {
 fn no_dangle() -> String {
     let s = String::from("hello");
     s
+}
+
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+    s.len()
+}
+
+fn first_word_slice(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    &s[..]
 }
