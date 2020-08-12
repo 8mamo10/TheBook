@@ -36,7 +36,12 @@ fn main() -> Result<(), Box<dyn Error>> {
     //let f = File::open("hello3.txt").expect("Failed to open hello3.txt");
 
     let s = read_username_from_file();
-    println!("username is {:?}", s);
+    let name = match s {
+        Ok(s) => s,
+        Err(_) => String::from("XXX"),
+    };
+    //println!("username is {:?}", s);
+    println!("username is {:?}", name);
     let s = read_username_from_file2();
     println!("username is {:?}", s);
     let s = read_username_from_file3();
