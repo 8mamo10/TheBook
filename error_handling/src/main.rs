@@ -49,6 +49,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     let s = read_username_from_file4();
     println!("username is {:?}", s);
 
+    let g = Guess::new(1);
+    println!("guess is {}", g.value());
+
     Ok(())
 }
 
@@ -80,4 +83,21 @@ fn read_username_from_file3() -> Result<String, io::Error> {
 
 fn read_username_from_file4() -> Result<String, io::Error> {
     fs::read_to_string("hello4.txt")
+}
+
+pub struct Guess {
+    value: i32,
+}
+
+impl Guess {
+    pub fn new(value: i32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value mast be between 1 and 100, got {}", value);
+        }
+        Guess { value }
+    }
+
+    pub fn value(&self) -> i32 {
+        self.value
+    }
 }
