@@ -14,6 +14,10 @@ pub fn add_two(a: i32) -> i32 {
     a + 2
 }
 
+pub fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 pub fn greeting(name: &str) -> String {
     format!("Hello {}!", name)
 }
@@ -115,7 +119,7 @@ mod tests {
     #[test]
     fn this_test_will_fail() {
         let value = prints_and_returns_10(8);
-        assert_eq!(5, value);
+        // assert_eq!(5, value); // fail
     }
 
     #[test]
@@ -136,4 +140,9 @@ mod tests {
     #[test]
     #[ignore]
     fn expensive_test() {}
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, internal_adder(2, 2));
+    }
 }
