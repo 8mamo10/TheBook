@@ -59,4 +59,20 @@ fn main() {
     let equal_to_x = |z| z == x;
     let y = 4;
     assert!(equal_to_x(y));
+
+    // error[E0434]: can't capture dynamic environment in a fn item
+    // let x = 4;
+    // fn equal_to_x(z: i32) -> bool {
+    //     z == x
+    // }
+    // let y = 4;
+    // assert!(equal_to_x(y));
+
+    // error[E0382]: borrow of moved value: `x`
+    // let x = vec![1, 2, 3];
+    // let equal_to_x = move |z| z == x;
+    // println!("can't use x here: {:?}", x);
+
+    // let y = vec![1, 2, 3];
+    // assert!(equal_to_x(y));
 }
