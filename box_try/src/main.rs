@@ -80,6 +80,9 @@ fn main() {
         println!("count after creating c = {}", Rc::strong_count(&a));
     }
     println!("count after c goes out of scope = {}", Rc::strong_count(&a));
+
+    let x = 5;
+    let y = &mut x;
 }
 
 fn hello(name: &str) {
