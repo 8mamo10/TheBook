@@ -81,8 +81,9 @@ fn main() {
     }
     println!("count after c goes out of scope = {}", Rc::strong_count(&a));
 
-    let x = 5;
-    let y = &mut x;
+    // error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
+    //let x = 5;
+    //let y = &mut x;
 }
 
 fn hello(name: &str) {
