@@ -3,11 +3,21 @@ struct Point {
     y: i32,
 }
 
+struct Point3d {
+    x: i32,
+    y: i32,
+    z: i32,
+}
+
 enum Message {
     Quit,
     Move { x: i32, y: i32 },
     Write(String),
     ChangeColor(i32, i32, i32),
+}
+
+enum Text {
+    Hello { id: i32 },
 }
 
 fn main() {
@@ -141,9 +151,101 @@ fn main() {
     let sum_of_squares: i32 = points.iter().map(|&Point { x, y }| x * x + y * y).sum();
     println!("sum_of_sauares: {}", sum_of_squares);
 
-    let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
+    let ((_feet, _inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
 
     foo(3, 4);
+
+    let mut setting_value = Some(5);
+    //let mut setting_value = None;
+    let new_setting_value = Some(10);
+    match (setting_value, new_setting_value) {
+        (Some(_), Some(_)) => {
+            println!("Can't overwrite an existing customized value");
+        }
+        _ => {
+            setting_value = new_setting_value;
+        }
+    }
+    println!("setting is {:?}", setting_value);
+
+    let numbers = (2, 4, 8, 16, 32);
+    match numbers {
+        (first, _, third, _, fifth) => {
+            println!("Some numbers: {}, {}, {}", first, third, fifth);
+        }
+    }
+    match numbers {
+        (first, _, .., fifth) => {
+            println!("Some numbers: {}, {}", first, fifth);
+        }
+    }
+
+    let s = Some(String::from("Hello!"));
+    //if let Some(_s) = s {
+    if let Some(_) = s {
+        println!("found a string");
+    }
+    println!("{:?}", s);
+
+    let origin = Point3d { x: 0, y: 0, z: 0 };
+    match origin {
+        Point3d { x, .. } => println!("x is {}", x),
+    }
+
+    // ref
+    let robot_name = Some(String::from("Bros"));
+    match robot_name {
+        Some(ref name) => println!("Found a name: {}", name),
+        None => (),
+    }
+    println!("robot_name is {:?}", robot_name);
+
+    let mut robot_name = Some(String::from("Bros"));
+    match robot_name {
+        Some(ref mut name) => *name = String::from("Another name"),
+        None => (),
+    }
+    println!("robot_name is {:?}", robot_name);
+
+    // match guard
+    let num = Some(4);
+    //let num = Some(10);
+    match num {
+        Some(x) if x < 5 => println!("less than five: {}", x),
+        Some(x) => println!("{}", x),
+        None => (),
+    }
+
+    //let x = Some(5);
+    //let x = Some(50);
+    let x = Some(10);
+    let y = 10;
+    match x {
+        Some(50) => println!("Got 50"),
+        Some(n) if n == y => println!("Matched, n = {:?}", n),
+        _ => println!("Default case, x = {:?}", x),
+    }
+    println!("at the end: x = {:?}, y = {:?}", x, y);
+
+    let x = 4;
+    //let y = false;
+    let y = true;
+    match x {
+        4 | 5 | 6 if y => println!("yes"),
+        _ => println!("no"),
+    }
+
+    // @
+    //let text = Text::Hello { id: 5 };
+    //let text = Text::Hello { id: 12 };
+    let text = Text::Hello { id: 100 };
+    match text {
+        Text::Hello {
+            id: id_variable @ 3...7,
+        } => println!("Found an id in range: {}", id_variable),
+        Text::Hello { id: 10...12 } => println!("Found an id in another range"),
+        Text::Hello { id } => println!("Found some other id: {}", id),
+    }
 }
 
 fn print_coordinates(&(x, y): &(i32, i32)) {
