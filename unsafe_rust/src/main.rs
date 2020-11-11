@@ -10,8 +10,13 @@ pub extern "C" fn call_from_c() {
 use std::slice;
 
 static HELLO_WORLD: &str = "Hello, world!";
+static mut COUNTER: u32 = 0;
 
 unsafe fn dangerous() {}
+
+unsafe trait Foo {}
+
+unsafe impl Foo for i32 {}
 
 fn main() {
     let mut num = 5;
@@ -46,6 +51,11 @@ fn main() {
     }
 
     println!("name is {}", HELLO_WORLD);
+
+    add_to_count(3);
+    unsafe {
+        println!("COUNTER: {}", COUNTER);
+    }
 }
 
 // fn split_at_mut(slice: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
@@ -65,5 +75,11 @@ fn split_at_mut(slice: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
             slice::from_raw_parts_mut(ptr, mid),
             slice::from_raw_parts_mut(ptr.offset(mid as isize), len - mid),
         )
+    }
+}
+
+fn add_to_count(inc: u32) {
+    unsafe {
+        COUNTER += inc;
     }
 }
