@@ -1,4 +1,5 @@
 # The Book
+```
 cargo new hoge
 cargo run
 cargo test
@@ -8,3 +9,4 @@ cargo test -- --show-output
 cargo test -- --ignored
 cargo test --test hoge
 cargo clean
+```
